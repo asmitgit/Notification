@@ -93,7 +93,8 @@
                             message.setAttribute("id", data[x]._id);
                             message.setAttribute('class', 'chat-message');
                             message.innerHTML ="<div>" 
-                                +data[x].ts+"</div>" 
+                                //+data[x].ts+"</div>" 
+                                +"Inbound Ticket </div>" 
                                 +"<div><a href='javascript:void(0)' id='"+data[x].eid+"/"+data[x].ticketid+"/"+data[x]._id +"' onclick='OpenTicket(this)'>"
                                     +data[x].ticketid
                                     +"</a>  <b id='"
