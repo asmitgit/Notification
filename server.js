@@ -52,7 +52,7 @@ mongo.connect('mongodb://10.0.8.62:27017/TicketSystem', function(err, db){
 
     // Connect to Socket.io
     client.on('connection', function(socket){
-        let chat = db.collection('Notification');
+        var chat = db.collection('Notification');
 
         // Create function to send status
         sendStatus = function(s){
@@ -119,7 +119,7 @@ mongo.connect('mongodb://10.0.8.62:27017/TicketSystem', function(err, db){
             console.log(client);
            
                 console.log('hello connected...');
-                let chat = db.collection('Notification');
+                var chat = db.collection('Notification');
                 req.body.read = false;
                 console.log(req.body);
                 chat.insert(req.body, function(){                   
