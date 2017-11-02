@@ -104,7 +104,7 @@
                             message.setAttribute('class', 'chat-message');
                             var dateTime = new Date(data[x].ts);
                             dateTime = moment(dateTime).calendar();
-                            message.innerHTML ="<div>" 
+                            message.innerHTML ="<div id='"+data[x]._id+"'>" 
                                 //+data[x].ts+"</div>" 
                                 +"Inbound Ticket<span>" +dateTime+"</span> </div>" 
                                 // +"<div>" 
@@ -135,7 +135,7 @@
                     console.log(data);
                    
                 });
-                var _div= document.getElementById(elem.id);
+                var _div= document.getElementById(elem.id.split('/')[2]);
                    _div.outerHTML = "";
         }
 
