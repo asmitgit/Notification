@@ -81,7 +81,7 @@
             }
 
             // Connect to socket.io
-            var socket = io.connect('http://10.80.10.140:4000');
+            var socket = io.connect('http://socketntf.policybazaar.com');
 //alert(getUrlVars()["eid"]);
             socket.emit('GetMyData',  {
                             eid:getUrlVars()["eid"]
@@ -125,7 +125,7 @@
 
         function MarkAsRead(elem){
             //alert(elem.id);
-            var socket = io.connect('http://10.80.10.140:4000');
+            var socket = io.connect('http://socketntf.policybazaar.com');
             socket.emit('MarkRead',  {
                             _id:elem.id
                         },function(data){
@@ -139,7 +139,7 @@
         function OpenTicket(elem){
             //alert(elem.id);
 
-            var socket = io.connect('http://10.80.10.140:4000');
+            var socket = io.connect('http://socketntf.policybazaar.com');
             socket.emit('MarkRead',  {
                             _id:elem.id.split('/')[2]
                         },function(data){
