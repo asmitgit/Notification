@@ -109,7 +109,7 @@ mongo.connect('mongodb://10.0.8.62:27017/TicketSystem', function(err, db){
                 // socket.emit('output', res);
             });
         }
-        catch{}
+        catch(e){}
         });
     });
 });
