@@ -89,7 +89,7 @@ mongo.connect('mongodb://10.0.8.62:27017/TicketSystem', function(err, db){
         });
 
         socket.on('MarkRead', function(data){                   
-            console.log(data._id);  
+           
             // db.collection( 'students' ).update (
             //     { _id : doc._id },
             //     { $set : { scores:zz } },
@@ -97,6 +97,8 @@ mongo.connect('mongodb://10.0.8.62:27017/TicketSystem', function(err, db){
             //         if ( err ) throw err;
             //     }
             // );
+            try{
+                console.log(data._id);  
             chat.update({ '_id' : ObjectID(data._id) },{$set : { 'read':true }},function(err, res){
                 if(err){
                     throw err;
@@ -106,6 +108,8 @@ mongo.connect('mongodb://10.0.8.62:27017/TicketSystem', function(err, db){
                 // // Emit the messages
                 // socket.emit('output', res);
             });
+        }
+        catch{}
         });
     });
 });
