@@ -6,11 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
     <title>Notification</title>
-    <style>
-       
+    <style>       
         .chat-message{display: table; width: 100%;}
+        .chat-message.active_row{background: #f1f4f7;}
         .hide{display: none !important}
-        .chat-message > div{display: table-cell; width: 50%; border-bottom:1px solid #ddd; padding:5px; margin: 0; box-sizing:border-box; font-size: 14px;    text-align: center; }
+        .chat-message > div{display: table-cell; width: 50%; border-bottom:1px solid #ddd; padding:5px; margin: 0; box-sizing:border-box; font-size: 14px;    text-align: center; vertical-align: middle;}
+        .card{border:0 !important; border-left: 1px solid #ddd !important;}
+        .chat-message > div span{ display: block; font-size: 11px;}
+        .col-sm-12{padding:0 !important;}
+        #message{border-left: 1px solid #ddd;}
     </style>
 </head>
 <body>
@@ -31,7 +35,10 @@
             </div>
         </div>
     </div>
-
+    <script
+    src="https://code.jquery.com/jquery-3.2.1.min.js"
+    integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+    crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
 
     <script>
@@ -74,7 +81,7 @@
             }
 
             // Connect to socket.io
-            var socket = io.connect('http://10.34.83.17:4000');
+            var socket = io.connect('http://10.80.10.140:4000');
 //alert(getUrlVars()["eid"]);
             socket.emit('GetMyData',  {
                             eid:getUrlVars()["eid"]
@@ -84,17 +91,23 @@
 
             // Check for connection
             socket.on('output', function(data){
+                var _count=0;
                     //console.log(data);
                     if(data.length){
                         for(var x = 0;x < data.length;x++){
                             // Build out message div
-                            if(data[x].eid == getUrlVars()["eid"]){
+                            if( data[x].eid == getUrlVars()["eid"] ){
+                                _count=_count+1;
+                                //parent.OpenNotification(_count);
                             var message = document.createElement('div');
                             message.setAttribute("id", data[x]._id);
                             message.setAttribute('class', 'chat-message');
                             message.innerHTML ="<div>" 
                                 //+data[x].ts+"</div>" 
-                                +"Inbound Ticket </div>" 
+                                +"Inbound Ticket<span>" +data[x].ts+"</span> </div>" 
+                                // +"<div>" 
+                                // //+data[x].ts+"</div>" 
+                                // +"Inbound Ticket </div>" 
                                 +"<div><a href='javascript:void(0)' id='"+data[x].eid+"/"+data[x].ticketid+"/"+data[x]._id +"' onclick='OpenTicket(this)'>"
                                     +data[x].ticketid
                                     +"</a>  <b id='"
@@ -102,6 +115,7 @@
                                     +"' onclick='MarkAsRead(this);'>x</b></div>";//+": "+data[x].message;
                             messages.appendChild(message);
                             messages.insertBefore(message, messages.firstChild);
+
                             }
                         }
                     }
@@ -111,7 +125,7 @@
 
         function MarkAsRead(elem){
             //alert(elem.id);
-            var socket = io.connect('http://10.34.83.17:4000');
+            var socket = io.connect('http://10.80.10.140:4000');
             socket.emit('MarkRead',  {
                             _id:elem.id
                         },function(data){
@@ -125,7 +139,7 @@
         function OpenTicket(elem){
             //alert(elem.id);
 
-            var socket = io.connect('http://10.34.83.17:4000');
+            var socket = io.connect('http://10.80.10.140:4000');
             socket.emit('MarkRead',  {
                             _id:elem.id.split('/')[2]
                         },function(data){

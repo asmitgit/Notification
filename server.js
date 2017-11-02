@@ -19,7 +19,7 @@ const client = require('socket.io').listen(4000).sockets;
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-var port = process.env.PORT || 8080;        // set our port
+var port = process.env.PORT || 80;        // set our port
 
 // ROUTES FOR OUR API
 // =============================================================================
@@ -27,7 +27,7 @@ var router = express.Router();              // get an instance of the express Ro
 var path    = require("path");
 app.use(express.static(__dirname));
 
-// test route to make sure everything is working (accessed at GET http://localhost:8080/api)
+// test route to make sure everything is working (accessed at GET http://localhost:80/api)
 router.get('/', function(req, res) {
     res.json({ message: 'hooray! welcome to our api!' });   
 });
@@ -110,7 +110,7 @@ mongo.connect('mongodb://10.0.8.62:27017/TicketSystem', function(err, db){
     });
 });
     router.route('/AddTicketNotification')
-    // create a bear (accessed at POST http://localhost:8080/api/bears)
+    // create a bear (accessed at POST http://localhost:80/api/bears)
     .post(function(req, res) {
         console.log('hello');
         mongo.connect('mongodb://10.0.8.62:27017/TicketSystem', function(err, db){
