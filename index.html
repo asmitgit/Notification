@@ -135,7 +135,7 @@
             try{
             var socket = io.connect('http://10.34.83.17:4000');
             socket.emit('MarkRead',  {
-                            _id:elem.id
+                            _id:elem.id.split('/')[2]
                         },function(data){
                     console.log(data);
                    
