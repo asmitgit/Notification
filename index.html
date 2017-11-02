@@ -40,7 +40,7 @@
     integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
     crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
-
+    <script src="node_modules\moment\moment.js"></script>
     <script>
         function getUrlVars()
 {
@@ -102,9 +102,11 @@
                             var message = document.createElement('div');
                             message.setAttribute("id", data[x]._id);
                             message.setAttribute('class', 'chat-message');
+                            var dateTime = new Date(data[x].ts);
+                            dateTime = moment(dateTime).calendar();
                             message.innerHTML ="<div>" 
                                 //+data[x].ts+"</div>" 
-                                +"Inbound Ticket<span>" +data[x].ts+"</span> </div>" 
+                                +"Inbound Ticket<span>" +dateTime+"</span> </div>" 
                                 // +"<div>" 
                                 // //+data[x].ts+"</div>" 
                                 // +"Inbound Ticket </div>" 
