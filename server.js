@@ -143,10 +143,11 @@ mongo.connect('mongodb://10.0.8.62:27017/TicketSystem', function(err, db){
     // create a bear (accessed at POST http://localhost:8080/api/bears)
     .post(function(req, res) {
         console.log('MarkTicketAsRead');
+        var chat = db.collection('Notification');
         mongo.connect('mongodb://10.0.8.62:27017/TicketSystem', function(err, db){
                 try{
                     console.log(req.body._id);  
-                chat.update({ '_id' : ObjectID(data._id) },{$set : { 'read':true }},function(err, res){
+                chat.update({ '_id' : ObjectID(req.body._id._id) },{$set : { 'read':true }},function(err, res){
                     if(err){
                         console.log(res);
                     }
