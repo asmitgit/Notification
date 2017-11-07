@@ -101,7 +101,7 @@ mongo.connect('mongodb://10.0.8.62:27017/TicketSystem', function(err, db){
                 console.log(data._id);  
             chat.update({ '_id' : ObjectID(data._id) },{$set : { 'read':true }},function(err, res){
                 if(err){
-                    throw err;
+                    console.log(res);
                 }
                 //console.log(res);  
                 // console.log(res);
@@ -109,7 +109,7 @@ mongo.connect('mongodb://10.0.8.62:27017/TicketSystem', function(err, db){
                 // socket.emit('output', res);
             });
         }
-        catch(e){}
+        catch(e){console.log(e);  }
         });
     });
 });
@@ -136,6 +136,26 @@ mongo.connect('mongodb://10.0.8.62:27017/TicketSystem', function(err, db){
         console.log(req.body);     
       
              res.json({ message: 'true' });
+        // });
+    
+    });
+    router.route('/MarkTicketAsRead')
+    // create a bear (accessed at POST http://localhost:8080/api/bears)
+    .post(function(req, res) {
+        console.log('MarkTicketAsRead');
+        mongo.connect('mongodb://10.0.8.62:27017/TicketSystem', function(err, db){
+                try{
+                    console.log(req.body._id);  
+                chat.update({ '_id' : ObjectID(data._id) },{$set : { 'read':true }},function(err, res){
+                    if(err){
+                        console.log(res);
+                    }
+                });
+            }
+            catch(e){console.log(e);  }                
+        });
+        console.log(req.body);           
+        res.json({ message: 'true' });
         // });
     
     });
