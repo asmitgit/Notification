@@ -148,7 +148,7 @@ mongo.connect('mongodb://10.0.8.62:27017/TicketSystem', function(err, db){
                 console.log(req.body);
                 try{
                     console.log(req.body._id);  
-                chat.update({ '_id' : ObjectID(req.body._id._id) },{$set : { 'read':true }},function(err, res){
+                chat.update({ '_id' : ObjectID(req.body._id) },{$set : { 'read':true }},function(err, res){
                     if(err){
                         console.log(res);
                     }
